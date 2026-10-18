@@ -1,0 +1,18 @@
+{
+  "name": "WonderPatch \u2014 A little world, a big family",
+  "short_name": "WonderPatch",
+  "description": "A cozy paper-craft family creativity game.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6edda",
+  "theme_color": "#f6e8c9",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
