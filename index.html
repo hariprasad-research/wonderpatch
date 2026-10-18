@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6e8c9">
+  <meta name="description" content="WonderPatch is a cozy paper-craft family game. Build a garden, complete silly missions, and discover surprising combinations.">
+  <title>WonderPatch — A little world, a big family</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" data-nav="home" aria-label="WonderPatch home">
+        <span class="brand-mark" aria-hidden="true">🌼</span>
+        <span><strong>WonderPatch</strong><small>A little world, a big family</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="save-status" id="saveStatus" aria-live="polite">Saved on this device</span>
+        <button class="icon-button" id="settingsBtn" aria-label="Open settings" title="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="screen active" id="homeScreen" aria-labelledby="homeTitle">
+        <div class="hero paper-panel">
+          <div class="hero-copy">
+            <span class="eyebrow">A COZY FAMILY CREATION GAME</span>
+            <h1 id="homeTitle">A little world.<br><span>A big family.</span></h1>
+            <p>Make a tiny garden, try unexpected combinations, and discover the funny things your imagination creates.</p>
+            <div class="hero-actions">
+              <button class="button primary" id="playBtn">▶ Play together</button>
+              <button class="button secondary" id="freeCreateBtn">✂ Free create</button>
+            </div>
+            <div class="mini-stats">
+              <span>🌱 <b id="homeDiscoveries">0</b> discoveries</span>
+              <span>🧩 <b id="homeMissions">0</b> missions completed</span>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Paper-craft garden illustration" role="img">
+            <div class="sun paper-shape">☀️</div><div class="cloud cloud-one">☁️</div><div class="cloud cloud-two">☁️</div>
+            <div class="hill hill-back"></div><div class="hill hill-front"></div>
+            <div class="paper-tree tree-one">🌳</div><div class="paper-tree tree-two">🌲</div>
+            <div class="tiny-house">🏡</div><div class="paper-flower flower-one">🌷</div><div class="paper-flower flower-two">🌼</div>
+            <div class="paper-duck">🦆</div><div class="paper-pond">💧</div>
+          </div>
+        </div>
+        <div class="home-grid">
+          <button class="feature-card" id="missionsCard"><span class="feature-icon">🧩</span><span><b>Family missions</b><small>Work toward a silly goal together.</small></span><span class="card-arrow">→</span></button>
+          <button class="feature-card" id="collectionCard"><span class="feature-icon">📖</span><span><b>Discovery book</b><small>Revisit all the things you found.</small></span><span class="card-arrow">→</span></button>
+          <button class="feature-card" id="gardenCard"><span class="feature-icon">🌿</span><span><b>Your Patch</b><small>Keep building your little world.</small></span><span class="card-arrow">→</span></button>
+        </div>
+        <p class="footnote">Made for sharing one screen, taking turns, and laughing together.</p>
+      </section>
+
+      <section class="screen" id="setupScreen" aria-labelledby="setupTitle">
+        <div class="section-heading"><button class="back-button" data-nav="home">← Home</button><div><span class="eyebrow">BEFORE THE FUN</span><h2 id="setupTitle">Who's playing today?</h2><p>Choose your players, then pick a way to play.</p></div></div>
+        <div class="setup-layout">
+          <div class="paper-panel setup-panel">
+            <h3>Players</h3>
+            <p class="muted">Pass the device after each turn. Solo play is welcome too.</p>
+            <div class="player-count" role="group" aria-label="Number of players">
+              <button data-player-count="1">1</button><button data-player-count="2" class="selected">2</button><button data-player-count="3">3</button><button data-player-count="4">4</button>
+            </div>
+            <div id="playerNames" class="player-names"></div>
+          </div>
+          <div class="paper-panel setup-panel">
+            <h3>Choose your adventure</h3>
+            <button class="mode-card" id="missionModeBtn"><span>🎯</span><span><b>Family missions</b><small>Try a shared challenge and earn discoveries.</small></span><span>→</span></button>
+            <button class="mode-card" id="freeModeBtn"><span>🎨</span><span><b>Free create</b><small>Build, place, remove, and experiment freely.</small></span><span>→</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="gameScreen" aria-labelledby="gameTitle">
+        <div class="game-heading">
+          <button class="back-button" data-nav="home">← Menu</button>
+          <div><span class="eyebrow" id="modeEyebrow">YOUR PATCH</span><h2 id="gameTitle">The Garden</h2></div>
+          <div class="turn-pill" id="turnPill">🌼 Player 1's turn</div>
+        </div>
+        <div class="mission-banner" id="missionBanner">
+          <span class="mission-emoji">🌙</span><div><small>FAMILY MISSION</small><strong id="missionTitle">Make the Moon Laugh</strong><p id="missionDescription">Try the moon with something musical.</p></div><span class="mission-progress" id="missionProgress">0/1</span>
+          <button class="small-button" id="changeMissionBtn" title="Choose another mission">Change</button>
+        </div>
+        <div class="garden-layout">
+          <div class="garden-board paper-panel" id="gardenBoard" aria-label="Interactive garden. Select an object below, then tap an open spot to place it.">
+            <div class="garden-sky"><span class="sky-sun">☀️</span><span class="sky-cloud cloud-a">☁️</span><span class="sky-cloud cloud-b">☁️</span></div>
+            <div class="garden-hill hill-a"></div><div class="garden-hill hill-b"></div>
+            <div class="garden-path"></div>
+            <div class="garden-decor decor-tree">🌳</div><div class="garden-decor decor-house">🏡</div><div class="garden-decor decor-bush">🌿</div>
+            <div id="placedObjects" class="placed-objects"></div>
+            <div class="board-tip" id="boardTip">Choose an object below, then tap the garden to place it.</div>
+            <div class="board-controls"><button class="small-button" id="undoBtn">↶ Undo</button><button class="small-button" id="clearBoardBtn">Clear objects</button></div>
+          </div>
+          <aside class="game-side">
+            <div class="paper-panel inventory-panel">
+              <div class="panel-heading"><div><h3>Object basket</h3><p>Pick something to place.</p></div><span>✂️</span></div>
+              <div class="object-tray" id="objectTray"></div>
+              <div class="selected-object" id="selectedObjectLabel">Nothing selected</div>
+            </div>
+            <div class="paper-panel experiment-panel">
+              <h3>Try a combination</h3>
+              <p class="muted">Place at least two objects in the garden, then select two of them.</p>
+              <div class="selected-pair" id="selectedPair"><span>＋ First object</span><span>＋ Second object</span></div>
+              <button class="button primary full-width" id="tryButton" disabled>✨ Try it!</button>
+              <p class="inline-message" id="gameMessage" aria-live="polite"></p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen" id="collectionScreen" aria-labelledby="collectionTitle">
+        <div class="section-heading"><button class="back-button" data-nav="home">← Home</button><div><span class="eyebrow">YOUR LITTLE ARCHIVE</span><h2 id="collectionTitle">Discovery book</h2><p>Every discovery is a story your family made together.</p></div></div>
+        <div class="collection-summary paper-panel"><span class="big-icon">📚</span><div><b id="collectionCount">0 discoveries found</b><p>Keep experimenting to fill your book.</p></div><div class="progress-track"><span id="collectionProgress"></span></div></div>
+        <div class="filter-row" id="collectionFilters"><button class="filter-button selected" data-filter="all">Everything</button><button class="filter-button" data-filter="creature">Creatures</button><button class="filter-button" data-filter="nature">Nature</button><button class="filter-button" data-filter="special">Special</button></div>
+        <div class="discovery-grid" id="discoveryGrid"></div>
+      </section>
+
+      <section class="screen" id="settingsScreen" aria-labelledby="settingsTitle">
+        <div class="section-heading"><button class="back-button" data-nav="home">← Home</button><div><span class="eyebrow">MAKE IT YOURS</span><h2 id="settingsTitle">Settings</h2><p>Small choices for a comfortable play session.</p></div></div>
+        <div class="paper-panel settings-panel">
+          <label class="setting-row"><span><b>Sound effects</b><small>Play little sounds for discoveries.</small></span><input type="checkbox" id="soundToggle" checked></label>
+          <label class="setting-row"><span><b>Reduce motion</b><small>Use calmer, shorter animations.</small></span><input type="checkbox" id="motionToggle"></label>
+          <label class="setting-row"><span><b>Large text</b><small>Make instructions and buttons easier to read.</small></span><input type="checkbox" id="largeTextToggle"></label>
+          <div class="settings-actions"><button class="button secondary" id="exportBtn">⬇ Export save</button><label class="button secondary import-label">⬆ Import save<input type="file" id="importInput" accept=".json,application/json" hidden></label><button class="button danger" id="resetBtn">Reset all progress</button></div>
+          <p class="muted">Your progress is stored locally in this browser. Export a backup before clearing browser data or moving to another device.</p>
+        </div>
+        <div class="paper-panel about-panel"><h3>About WonderPatch</h3><p>A small family creativity game about trying things, making discoveries, and building a garden together. This first version works offline after its files have loaded, and does not require an account or server.</p><p class="muted">WonderPatch is a working first-release web game. Online multiplayer and cross-device save syncing are not included.</p></div>
+      </section>
+    </main>
+
+    <footer class="app-footer"><span>🌱 WonderPatch</span><span>Make a little magic together.</span></footer>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <section class="modal paper-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close dialog">×</button>
+      <div class="modal-illustration" id="modalIllustration">✨</div>
+      <span class="eyebrow" id="modalEyebrow">A NEW DISCOVERY</span>
+      <h2 id="modalTitle">Something wonderful!</h2>
+      <p id="modalText"></p>
+      <div class="modal-actions" id="modalActions"><button class="button primary" id="modalPrimary">Back to garden</button></div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="game.js"></script>
+</body>
+</html>
